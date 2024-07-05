@@ -9,7 +9,7 @@ You should comment out all portions of your portfolio that you have not complete
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-| FirstName LastInitialOnly | School Name | Electrical Engineering | Incoming Senior
+| Hrehaan M | Skyline High School | Mechanical Engineering | Incoming Junior
 
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
@@ -46,6 +46,7 @@ For your second milestone, explain what you've worked on since your previous mil
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 
 
 My project is the ball tracking robot which uses ultrasonic sensors and a raspberry pi camera to track a red ball. The camera an ultrasonic sensors are all connected to a raspberry pi 4. For my first milestone I finished building the base of my car with the motors and got them connected to the raspberry pi through an H bridge. After that i wrote code to test if the motors worked and the car could move forward, backwars, right, and left. Then i wired up my Ultrasonic sensors to the raspberry pi and wrote code to test them to make sure they worked. Lastly I wrote code to combine the movement of the motors with the what the ultrasonic sensor detects so if the left ultrasonic sensor detects an object less than 5 cm away the car turns to the left if the right ultrasonic sensor detects an object less than 5 cm away the car turns to the right and if the middle one detects an object less than 5 cm away it stops. For my next milestone my plan is to attach the pi camaera to the car and get it to be able to detect the ball.
