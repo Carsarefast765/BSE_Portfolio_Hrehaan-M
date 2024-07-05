@@ -47,11 +47,9 @@ For your second milestone, explain what you've worked on since your previous mil
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-For your first milestone, describe what your project is and how you plan to build it. You can include:
-- An explanation about the different components of your project and how they will all integrate together
-- Technical progress you've made so far
-- Challenges you're facing and solving in your future milestones
-- What your plan is to complete your project
+
+My project is the ball tracking robot which uses ultrasonic sensors and a raspberry pi camera to track a red ball. The camera an ultrasonic sensors are all connected to a raspberry pi 4. For my first milestone I finished building the base of my car with the motors and got them connected to the raspberry pi through an H bridge. After that i wrote code to test if the motors worked and the car could move forward, backwars, right, and left. Then i wired up my Ultrasonic sensors to the raspberry pi and wrote code to test them to make sure they worked. Lastly I wrote code to combine the movement of the motors with the what the ultrasonic sensor detects so if the left ultrasonic sensor detects an object less than 5 cm away the car turns to the left if the right ultrasonic sensor detects an object less than 5 cm away the car turns to the right and if the middle one detects an object less than 5 cm away it stops. For my next milestone my plan is to attach the pi camaera to the car and get it to be able to detect the ball.
+
 
 # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
