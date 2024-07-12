@@ -35,7 +35,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
+
 Since my last milestone I completed the my base project. I got the image proccessing working so the robot only sees the ball. I the ball is in the center of the screen it goes forward and if it is on the left or right it turns so it is in the center then goes forward. It also checks if the ball takes up most of the screen if it does then it stops. Then if the ultrasonic sensor detects an object it stops. If the car does not see the ball it starts to spin right slowly until it detects the ball. When I was writing the code for this project there were many errors and problems but the biggest one happened after everything started working. The next day it all sudenly stoped working and it was even more frustrating because everything had been working. I eventualy figured out that some of the ultrasonic sensor wires got randomly got unplugged so the code was getting stuck. Next I plan to add my modifications since my base project is complete. I plan on adding a gimbel for the raspberry pi so it can turn to the left right up and down. I also plan on adding LED lights to the front to improve the image that the pi cam is getting and an LED light that turns on only when the program is running so people know not to go near it when is is running.
 
 # First Milestone
