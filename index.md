@@ -38,8 +38,8 @@ For your final milestone, explain the outcome of your project. Key details to in
 For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
 - Technical details of what you've accomplished and how they contribute to the final goal
 - What has been surprising about the project so far
-- Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone 
+- when I was writing the code for this project there were many errors and problems but the biggest one happened after everything started working. The next day it all sudenly stoped working and it was even more frustrating because everything had been working. I eventualy figured out that some of the ultrasonic sensor wires got randomly got unplugged so the code was getting stuck.
+- next I plan to add my modifications since my base project is complete. I plan on adding a gimbel for the raspberry pi so it can turn to the left right up and down. I also plan on adding LED lights to the front to improve the image that the pi cam is getting and an LED light that turns on only when the program is running so people know not to go near it when is is running.
 
 # First Milestone
 
