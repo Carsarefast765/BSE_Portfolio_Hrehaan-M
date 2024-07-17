@@ -56,16 +56,323 @@ Here's where you'll put images of your schematics. [Tinkercad](https://www.tinke
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
 ```c++
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  Serial.println("Hello World!");
-}
+import RPi.GPIO as GPIO
+import time
+import cv2 #OpenCV
+from picamera2 import Picamera2, Preview
+import numpy as np
 
-void loop() {
-  // put your main code here, to run repeatedly:
 
-}
+
+
+
+
+
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(22, GPIO.OUT)
+GPIO.setup(23, GPIO.OUT)
+GPIO.setup(24, GPIO.OUT)
+GPIO.setup(14, GPIO.OUT)
+GPIO.setup(15, GPIO.OUT)
+GPIO.setup(4,GPIO.OUT)
+bottom = GPIO.PWM(4,50)
+GPIO.setup(3,GPIO.OUT)
+top = GPIO.PWM(3,50)
+
+def right(sec):
+   GPIO.output(17, True)
+   GPIO.output(22, False)
+   GPIO.output(23, True)
+   GPIO.output(24, False)
+   time.sleep(sec)
+   stop()
+
+
+def left(sec):
+   GPIO.output(17, False)
+   GPIO.output(22, True)
+   GPIO.output(23, False)
+   GPIO.output(24, True)
+   time.sleep(sec)
+   stop()
+
+
+def stop():
+   GPIO.output(17, False)
+   GPIO.output(22, False)
+   GPIO.output(23, False)
+   GPIO.output(24, False)
+
+
+def reverse(sec):
+   GPIO.output(17, True)
+   GPIO.output(22, False)
+   GPIO.output(23, False)
+   GPIO.output(24, True)
+   time.sleep(sec)
+   stop()
+
+
+def forward():
+   GPIO.output(17, False)
+   GPIO.output(22, True)
+   GPIO.output(23, True)
+   GPIO.output(24, False)
+   #time.sleep(sec)
+   #stop()
+
+
+
+def top_set_angle(angle):
+    duty = angle / 18.0 + 2.5
+    GPIO.output(3, True)
+    top.ChangeDutyCycle(duty)
+    time.sleep(0.5)
+    GPIO.output(3, False)
+    top.ChangeDutyCycle(0)
+def light_blink(LED_PIN):
+    GPIO.output(LED_PIN, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(LED_PIN, GPIO.LOW)
+    GPIO.cleanup()
+def bottom_set_angle(angle):
+    duty = angle / 18.0 + 2.5
+    GPIO.output(4, True)
+    bottom.ChangeDutyCycle(duty)
+    time.sleep(1)
+    GPIO.output(4, False)
+    bottom.ChangeDutyCycle(0)
+
+
+# GPIO pins setup for Ultrasonic Sensor 1
+TRIG1 = 16  # GPIO 16 (pin 36)
+ECHO1 = 26  # GPIO 26 (pin 37)
+
+
+# GPIO pins setup for Ultrasonic Sensor 2
+TRIG2 = 27  # GPIO 27 (pin 13)
+ECHO2 = 25  # GPIO 25 (pin 22)
+
+
+# GPIO pins setup for Ultrasonic Sensor 3
+TRIG3 = 6   # GPIO 6  (pin 31)
+ECHO3 = 5   # GPIO 5  (pin 29)
+
+
+def setup():
+   GPIO.setmode(GPIO.BCM)
+
+
+   # Setup for Ultrasonic Sensor 1
+   GPIO.setup(TRIG1, GPIO.OUT)
+   GPIO.setup(ECHO1, GPIO.IN)
+
+
+   # Setup for Ultrasonic Sensor 2
+   GPIO.setup(TRIG2, GPIO.OUT)
+   GPIO.setup(ECHO2, GPIO.IN)
+
+
+   # Setup for Ultrasonic Sensor 3
+   GPIO.setup(TRIG3, GPIO.OUT)
+   GPIO.setup(ECHO3, GPIO.IN)
+
+
+def distance(trig, echo):
+   # Ensure the trigger pin is low initially
+   GPIO.output(trig, False)
+   time.sleep(0.1)
+
+
+   # Generate a short pulse to trigger the sensor
+   GPIO.output(trig, True)
+   time.sleep(0.00001)
+   GPIO.output(trig, False)
+
+
+   # Measure the duration of the echo pulse
+   while GPIO.input(echo) == 0:
+       pulse_start = time.time()
+
+
+   while GPIO.input(echo) == 1:
+       pulse_end = time.time()
+
+
+   pulse_duration = pulse_end - pulse_start
+
+
+   # Speed of sound at sea level is 343m/s, or 34300 cm/s
+   # Divide by 2 because we're measuring to and from the object
+   distance = (pulse_duration * 34300) / 2
+
+
+   return distance
+def segment_colour(frame):  
+   hsv_roi =  cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+  
+   mask_1 = cv2.inRange(hsv_roi, np.array([130, 150,40]), np.array([190,255,255]))
+
+
+   mask = mask_1
+   kern_dilate = np.ones((12,12),np.uint8)
+   kern_erode  = np.ones((6,6),np.uint8)
+   mask= cv2.erode(mask,kern_erode)     #Eroding
+   mask= cv2.dilate(mask,kern_dilate)     #Dilating
+  
+   (h,w) = mask.shape
+   cv2.namedWindow('mask',cv2.WINDOW_NORMAL)
+   cv2.resizeWindow('mask',800,600)
+   cv2.imshow('mask', mask) # Shows mask (B&W screen with identified red pixels)
+  
+   return mask
+
+
+def find_blob(blob): 
+   largest_contour=0
+   cont_index=0
+   contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+   for idx, contour in enumerate(contours):
+       area=cv2.contourArea(contour)
+       if (area >largest_contour):
+           largest_contour=area
+           cont_index=idx
+                  
+   r=(0,0,2,2)
+   if len(contours) > 0:
+       r = cv2.boundingRect(contours[cont_index])
+   
+   return r,largest_contour
+def get_centerX(x,w):
+   centerX = (w/2) + x
+   return centerX
+def get_centerY(y,h):
+   centerY = (h/2) + y
+   return centerY
+def draw_center(x,center_x,center_y):
+   cv2.circle(x,center_x,center_y,10,(255,0,0),-1)
+
+if __name__ == '__main__':
+   try:
+        picam2 = Picamera2()
+
+
+        camera_config = picam2.create_still_configuration(main={"size": (1920, 1080)}, lores={"size": (480, 270)}, display="lores")
+
+
+
+
+        picam2.configure(camera_config)
+        picam2.start_preview(Preview.QTGL) 
+        picam2.start()
+
+        
+        time.sleep(2)
+        top.start(0)
+        bottom.start(0)
+        angle = 80
+        top_set_angle(angle)
+        GPIO.output(14,GPIO.HIGH)
+        GPIO.output(15,GPIO.HIGH)
+        while(True):
+
+
+           im = picam2.capture_array()
+           height = im.shape[0]
+           width = im.shape[1]
+
+
+           setup()
+
+           hsv1 = cv2.cvtColor(im, cv2.COLOR_RGB2HSV)
+        #fucntion 1
+           mask_red=segment_colour(im[:,:,[0,1,2]])
+        #fucntion 2
+           #time.sleep(0.1)
+
+           loct,area=find_blob(mask_red)
+          
+           x,y,w,h=loct
+           #print(area)
+           centerx = get_centerX(x,w)
+           centery = get_centerY(y,h)
+           #print(centery)
+           #print("x = " + str(get_centerX(x,w)))
+           #print("y = " + str(get_centerY(y,h)))
+           #print(top_duty)
+           print(angle)
+           if(centery > 700 and angle < 175):
+               #top_duty += 0.5
+               #top.start(0)
+               angle -= 3
+               top_set_angle(angle)
+               #time.sleep(0.5)
+               #top.stop()
+           elif(1 < centery < 300 and angle > 5):
+               #top_duty += 0.5
+               #top.start(0)
+               angle += 3
+               top_set_angle(angle)
+               #time.sleep()
+           if(centerx > 1200):
+               right(0.1)
+           elif(centerx < 600):
+               left(0.1)
+           else:
+               if(centerx > 500 and centerx < 1300 and area < 1000000):
+                   forward()
+               else:
+                   stop()
+               '''
+               dist1 = distance(TRIG1, ECHO1)
+                   #print(f"Distance from Sensor 1: {dist1:.1f} cm")
+                  
+                  
+                   # Measure distance for Ultrasonic Sensor 2
+               dist2 = distance(TRIG2, ECHO2)
+                   #print(f"Distance from Sensor 2: {dist2:.1f} cm")
+                  
+                  
+                   # Measure distance for Ultrasonic Sensor 3
+               dist3 = distance(TRIG3, ECHO3)
+                   #print(f"Distance from Sensor 3: {dist3:.1f} cm")
+               if(dist1 <= 5):
+                   right(0.2)
+               elif(dist2 <= 5):
+                   left(0.2)
+               elif(dist3 <= 2):
+                   stop()
+
+               '''
+               
+           #print()
+           #cv2.circle(im,(get_centerX(x,w),get_centerY(y,h)),100,(255,0,0),-1)
+           #cv2.namedWindow('x',cv2.WINDOW_NORMAL)
+           #cv2.resizeWindow('x',800,600)
+          
+           #cv2.imshow('x',loct)
+
+
+
+   except KeyboardInterrupt:
+       stop()
+       GPIO.cleanup()
+
+       top.stop()
+
+
+
+
+
+# Measure distance for Ultrasonic Sensor 1
+          
+
+
+
+
+
 ```
 
 # Bill of Materials
