@@ -16,12 +16,9 @@ My project the ball tracking robot that uses a raspberry pi connected to a pi ca
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gGkE3N-eUoM?si=X-_Z4EOIG25q1VmU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
-- A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE
-For my final milestone I have added 2 modifications I added a servo Mount for my Pi cam and 2 LEDs on that iluminates what is in front of the car and the other blinks when the code is running as a saftey feature. One problem when implementing the servo mount was the mount came with its own driver board to run the servos but to use it in code you need to use some special libraries which i did not know and none ove my code worked. eventually i plugged the servos strait into the raspberry Pi and they worked.
+
+
+For my final milestone I have added 2 modifications I added a servo Mount for my Pi cam and 2 LEDs on that iluminates what is in front of the car and the other blinks when the code is running as a saftey feature. One problem when implementing the servo mount was the mount came with its own driver board to run the servos but to use it in code you need to use some special libraries which i did not know and none ove my code worked. eventually i plugged the servos strait into the raspberry Pi and they worked. One of the main things I have learned from BSE is how to solve a problem on my own through google or other reasources instead of always asking for help.
 
 
 
