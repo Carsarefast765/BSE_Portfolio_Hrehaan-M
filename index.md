@@ -49,6 +49,8 @@ My project is the ball tracking robot which uses ultrasonic sensors and a raspbe
 
 
 ```c++
+
+
 import RPi.GPIO as GPIO
 import time
 import cv2 #OpenCV
@@ -120,10 +122,12 @@ def forward():
 
 def top_set_angle(angle):
     duty = angle / 18.0 + 2.5
+    GPIO.output(15, GPIO.HIGH)
     GPIO.output(3, True)
     top.ChangeDutyCycle(duty)
     time.sleep(0.5)
     GPIO.output(3, False)
+    GPIO.output(15, GPIO.LOW)
     top.ChangeDutyCycle(0)
 def light_blink(LED_PIN):
     GPIO.output(LED_PIN, GPIO.HIGH)
@@ -268,10 +272,10 @@ if __name__ == '__main__':
         angle = 80
         top_set_angle(angle)
         GPIO.output(14,GPIO.HIGH)
-        GPIO.output(15,GPIO.HIGH)
+        bottom_set_angle(90)
         while(True):
 
-
+           GPIO.output(15,GPIO.HIGH)
            im = picam2.capture_array()
            height = im.shape[0]
            width = im.shape[1]
@@ -295,7 +299,8 @@ if __name__ == '__main__':
            #print("x = " + str(get_centerX(x,w)))
            #print("y = " + str(get_centerY(y,h)))
            #print(top_duty)
-           print(angle)
+           #print(angle)
+           GPIO.output(15,GPIO.LOW)
            if(centery > 700 and angle < 175):
                #top_duty += 0.5
                #top.start(0)
@@ -361,6 +366,7 @@ if __name__ == '__main__':
 
 # Measure distance for Ultrasonic Sensor 1
           
+
 
 
 
