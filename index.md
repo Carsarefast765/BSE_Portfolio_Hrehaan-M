@@ -21,7 +21,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 - What your biggest challenges and triumphs were at BSE
 - A summary of key topics you learned about
 - What you hope to learn in the future after everything you've learned at BSE
-For my final milestone I have added 2 modifications
+For my final milestone I have added 2 modifications I added a servo Mount for my Pi cam and 2 LEDs on that iluminates what is in front of the car and the other blinks when the code is running as a saftey feature. One problem when implementing the servo mount was the mount came with its own driver board to run the servos but to use it in code you need to use some special libraries which i did not know and none ove my code worked. eventually i plugged the servos strait into the raspberry Pi and they worked.
 
 
 
