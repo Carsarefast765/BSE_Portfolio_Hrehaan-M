@@ -9,10 +9,13 @@ My project the ball tracking robot that uses a raspberry pi connected to a pi ca
 
 
 ![Headstone Image](Bluestamp_photo_new.jpg)
-  
+
+# Demo Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Mz4pNeTKXe0?si=ui1VylyS1LTRmiva" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 # Final Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gGkE3N-eUoM?si=X-_Z4EOIG25q1VmU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
