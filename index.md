@@ -1,6 +1,5 @@
 # Ball Tracking Robot
-Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails!
-
+My project the ball tracking robot that uses a raspberry pi connected to a pi camera to track a red ball. It uses image processing to make all of the red pixels of the ball on the screen white and all of the non-red pixels black. If it sees the ball on the left or right side of the screen it turns to face it then goes towards it. I also added a servo mount to the Pi cam as a modification as well as some LEDs one to iluminate what the camera is seeing and the other to blink when the code is running as a saftey feature.
 
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
